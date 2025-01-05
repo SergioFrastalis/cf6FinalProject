@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Find Food Nutritional Information!</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f4f4f9;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    form {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    label, select, button {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      font-size: 16px;
+    }
+
+    select, button {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #nutrition {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      margin: 5px 0;
+      padding: 5px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    li:last-child {
+      border-bottom: none;
+    }
+  </style>
+</head>
+<body>
+<h1>Food Nutritional Information</h1>
+<form method="GET" action="/foods/details">
+  <label for="food">Select a Food:</label>
+  <select id="food" name="food">
+    <!-- Food options will be dynamically populated -->
+    <th:block th:each="food : ${foods}">
+      <option th:value="${food.id}" th:text="${food.name}"
+              th:selected="${selectedFoodId == food.id}"></option>
+
+    </th:block>
+  </select>
+  <button type="submit">Get Info</button>
+</form>
+
+<div id="nutrition">
+
+  <th:block th:if="${selectedFood != null}">
+    <h2>Nutritional Information for <span th:text="${selectedFood.name}"></span>:</h2>
+    <ul>
+      <li>Calories per 100 grams: <span th:text="${selectedFood.caloriesPerGram}"></span></li>
+      <li>Carbs per 100 grams: <span th:text="${selectedFood.carbsPerGram}"></span></li>
+      <li>Protein per 100 grams: <span th:text="${selectedFood.proteinPerGram}"></span></li>
+      <li>Fat per 100 grams: <span th:text="${selectedFood.fatPerGram}"></span></li>
+      <li>Fiber per 100 grams: <span th:text="${selectedFood.fiberPerGram}"></span></li>
+      <li>Vitamin A per 100 grams: <span th:text="${selectedFood.vitaminAPerGram}"></span></li>
+      <li>Vitamin B per 100 grams: <span th:text="${selectedFood.vitaminBPerGram}"></span></li>
+      <li>Vitamin C per 100 grams: <span th:text="${selectedFood.vitaminCPerGram}"></span></li>
+      <li>Iron per 100 grams: <span th:text="${selectedFood.ironPerGram}"></span></li>
+      <li>Calcium per 100 grams: <span th:text="${selectedFood.calciumPerGram}"></span></li>
+    </ul>
+  </th:block>
+</div>
+</body>
+</html>
